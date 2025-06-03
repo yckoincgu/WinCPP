@@ -1,9 +1,8 @@
 {
     "version": "0.2.0",
     "configurations": [
-        
         {
-            "name": "Debug (GDB)",
+            "name": "Run C++ (UCRT64)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
@@ -14,13 +13,7 @@
             "externalConsole": true,
             "MIMode": "gdb",
             "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
+            "preLaunchTask": "Build with G++ (UCRT64)"  // This is the key line
         }
     ]
 }
