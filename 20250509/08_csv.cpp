@@ -5,10 +5,10 @@
 
 int main()
 {
-    std::ifstream  fileDevice("X06512A.csv");
+    std::ifstream  inputFile("X06512A.csv");
     std::string line;
     int i=1;
-    while(std::getline(fileDevice,line))
+    while(std::getline(inputFile,line))
     {
     	std::cout<< "student " << i++ << ": "<< line << std::endl;
     }

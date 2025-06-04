@@ -21,7 +21,7 @@ int main()
 	student.printname(); 	// accessing member function 
 
 	int i;
-	std::cin>>i;
+	//std::cin>>i;
 	
 	return 0; 
 }

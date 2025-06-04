@@ -37,6 +37,8 @@ void printVectorCharacters(std::vector<char> characters){
     // Access elements of the vector using iterator
     std::cout << "Elements:";
     for (std::vector<char>::iterator it = characters.begin(); it != characters.end(); ++it) {
+        // iterator is a nested type alias (or nested class) 
+        // that is defined inside the std::vector
         std::cout << " " << *it;
     }
     std::cout << std::endl;
@@ -50,8 +52,8 @@ int main() {
 	std::vector<char> characters;
 	printVectorCharacters(characters);
 
-    int i;
-	std::cin>>i;
+    //int i;
+	//std::cin>>i;
 
     return 0;
 }
