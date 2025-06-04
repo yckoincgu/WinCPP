@@ -7,8 +7,8 @@ int multiply(int a, int b) { return a * b; }
 
 int main()
 {
-	int (*func)(int, int);	// declaration for a pointer to a function
-							// It declares func as a variable that can store the memory address of a function
+	int (*func)(int, int);	// int (*func)(int, int) returns an integer
+							// int* func(int, int) returns a pointer
 
 	// func is pointing to the multiplyTwoValues function
 	func = multiply;
