@@ -9,11 +9,13 @@ int main()
 	char op;
 	float num1, num2;
 
+	cout<< "enter an arithematic operator" << endl;
 	// It allows user to enter operator
 	// i.e. +, -, *, /
 	cin >> op;
 
 	// It allow user to enter the operands
+	cout<< "enter to intergers for operation" << endl;
 	cin >> num1 >> num2;
 
 	// Switch statement begins
