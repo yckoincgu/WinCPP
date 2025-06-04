@@ -14,7 +14,6 @@ int main()
     // with `*(int*)ptr` to get the value at that memory
     // location
     printf("%d\n", *(int*)ptr);	
-
 	// printf("%d\n", (int*)*ptr);	This is uncorrect due to losing data structure
     
     

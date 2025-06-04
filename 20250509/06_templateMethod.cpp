@@ -9,7 +9,7 @@ public:
 	/* 	It takes a parameter of type T and 
 		initializes the member variable data with the value passed to the constructor.
 	*/	
-    MyClass(T d) : data(d) {}
+    MyClass(T d) : data(d) {}   // assign d to data which is a member vaiable
 
     // Templated method to display data
     template <typename U>
@@ -21,7 +21,7 @@ public:
 int main() {
     // Instantiate MyClass with int data type
     // intObj is an object variable
-    MyClass<int> intObj(42);
+    MyClass<int> intObj(42);        //  initializes the data member of intObj to 42
     intObj.display("Integer");
 
     // Instantiate MyClass with double data type

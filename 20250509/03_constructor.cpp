@@ -15,7 +15,7 @@ class Student
 	} 
 	
 	//Parameterized Constructor 
-	Student(std::string name, int id):name(name), id(id) 
+	Student(std::string name, int id):name(name), id(id) 		// :name(name), id(id) mean this.name=name, this.id=id
 	{ 
 		cout <<"Parameterized Constructor called "<< endl; 
 
