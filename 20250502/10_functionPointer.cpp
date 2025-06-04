@@ -8,7 +8,7 @@ int multiply(int a, int b) { return a * b; }
 int main()
 {
 	int (*func)(int, int);	// int (*func)(int, int) returns an integer
-							// int* func(int, int) returns a pointer
+				// int* func(int, int) returns a pointer
 
 	// func is pointing to the multiplyTwoValues function
 	func = multiply;
