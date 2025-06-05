@@ -6,7 +6,6 @@ class MyClass
 {
 private:
     T data;
-
 public:
     /* 	It takes a parameter of type T and
         initializes the member variable data with the value passed to the constructor.

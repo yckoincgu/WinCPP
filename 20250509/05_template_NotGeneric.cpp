@@ -38,8 +38,8 @@ public:
 
 int main() {
     // Instantiate Xarray with a template variable of value 5
-    Xarray<5> arr1;
-    arr1.display(); 
+    Xarray<5> X;
+    X.display(); 
 
     // Instantiate Xarray with a template variable of value 10
     Xarray<10> arr2;

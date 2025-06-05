@@ -3,24 +3,23 @@
 using namespace std; 
 
 class Student { 
-	
 public: // Access specifier 
 	// Data Members 
-	string name; 
-	
+	string name; 	// class member
 	// Member Functions() 
-	void printname() { cout << "The student name is:" << name; } 
+	void printname() { cout << "The student name is:" << name << endl; } 
 }; 
 int main() 
 { 
-	
-	Student student; 		// Declare an object named student 
-	
-	student.name = "Abhi"; 	// accessing data member 
-	
-	student.printname(); 	// accessing member function 
+	Student student_1, student_2; 		// Declare an object named student 
+	student_1.name = "John"; 	// accessing data member
+	student_1.printname(); 	// accessing member function 
 
-	int i;
+	student_2.name = "Mary"; 	// accessing data member
+	student_2.printname(); 	// accessing member function
+
+
+	// int i;
 	//std::cin>>i;
 	
 	return 0; 
