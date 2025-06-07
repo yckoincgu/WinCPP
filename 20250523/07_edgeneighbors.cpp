@@ -2,12 +2,12 @@
 #include <set>
 using namespace std;
 
-class Vertice {
+class Vertex {
 public:
     bool visited = false;
-    std::set<Vertice*> neighbors;
+    std::set<Vertex*> neighbors;
     int nodeID;
-    Vertice(int nodeID) : nodeID(nodeID) {}
+    Vertex(int nodeID) : nodeID(nodeID) {}
 
     void printList() {
         std::cout << "Node " << nodeID << " has neighbors ";
@@ -41,13 +41,13 @@ public:
 template <typename T>
 class Graph {
 public:
-    std::set<T> vSet;
-    std::set<Edge<T>*> eSet;
+    std::set<T> verticesSet;
+    std::set<Edge<T>*> edgesSet;
     
     void buildEdgeNeighbors() {
-        for (auto e1 = eSet.begin(); e1 != eSet.end(); ++e1) {
+        for (auto e1 = edgesSet.begin(); e1 != edgesSet.end(); ++e1) {
             std::cout<< "e1(" << (*e1)->p->nodeID<<"," <<(*e1)->q->nodeID<<") has neighbors: ";
-            for (auto e2 = eSet.begin(); e2 != eSet.end(); ++e2) {
+            for (auto e2 = edgesSet.begin(); e2 != edgesSet.end(); ++e2) {
                 if (*e1 != *e2  && (        // 
                     ((*e1)->p == (*e2)->p) ||
                     ((*e1)->p == (*e2)->q) ||
@@ -64,21 +64,21 @@ public:
 };
 
 int main() {
-    Vertice v0(0), v1(1), v2(2), v3(3), v4(4);
-    Edge<Vertice*> e1(&v0, &v1), e2(&v0, &v2), e3(&v1, &v3), e4(&v1, &v4), e5(&v2, &v4);
+    Vertex v0(0), v1(1), v2(2), v3(3), v4(4);
+    Edge<Vertex*> e1(&v0, &v1), e2(&v0, &v2), e3(&v1, &v3), e4(&v1, &v4), e5(&v2, &v4);
 
-    Graph<Vertice*> g;
-    g.vSet.insert(&v0);
-    g.vSet.insert(&v1);
-    g.vSet.insert(&v2);
-    g.vSet.insert(&v3);
-    g.vSet.insert(&v4);
+    Graph<Vertex*> g;
+    g.verticesSet.insert(&v0);
+    g.verticesSet.insert(&v1);
+    g.verticesSet.insert(&v2);
+    g.verticesSet.insert(&v3);
+    g.verticesSet.insert(&v4);
 
-    g.eSet.insert(&e1);
-    g.eSet.insert(&e2);
-    g.eSet.insert(&e3);
-    g.eSet.insert(&e4);
-    g.eSet.insert(&e5);
+    g.edgesSet.insert(&e1);
+    g.edgesSet.insert(&e2);
+    g.edgesSet.insert(&e3);
+    g.edgesSet.insert(&e4);
+    g.edgesSet.insert(&e5);
     g.buildEdgeNeighbors();
 
     int i;

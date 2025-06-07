@@ -5,17 +5,17 @@
 
 using namespace std;
 
-class Vertice {
+class Vertex {
 public:
     bool visited = false;
-    list<Vertice*> neighbors;
+    list<Vertex*> neighbors;
     int nodeID;
 
-    Vertice(int nodeID) : nodeID(nodeID) {}
+    Vertex(int nodeID) : nodeID(nodeID) {}
 
     void printList() {
         cout << "Node " << nodeID << " has neighbors ";
-        for (list<Vertice*>::iterator it = neighbors.begin(); it != neighbors.end(); it++) {
+        for (list<Vertex*>::iterator it = neighbors.begin(); it != neighbors.end(); it++) {
             cout << (*it)->nodeID << ", ";
         }
         cout << endl;
@@ -24,10 +24,10 @@ public:
 
 class Edge {
 public:
-    Vertice* p;
-    Vertice* q;
+    Vertex* p;
+    Vertex* q;
 
-    Edge(Vertice* source_V, Vertice* destinate_V) : p(source_V), q(destinate_V) {
+    Edge(Vertex* source_V, Vertex* destinate_V) : p(source_V), q(destinate_V) {
         p->neighbors.push_back(q);
         q->neighbors.push_back(p);
     }
@@ -35,22 +35,22 @@ public:
 
 class Graph {
 public:
-    set<Vertice*> vSet;
+    set<Vertex*> vSet;
     set<Edge*> eSet;
 
-    void bfs(Vertice* startVertex) {
+    void bfs(Vertex* startVertex) {
         if (vSet.find(startVertex) == vSet.end()) return;
-        Vertice* neighbor;
-        queue<Vertice*> q;
+        Vertex* neighbor;
+        queue<Vertex*> q;
         startVertex->visited = true;
         q.push(startVertex);
 
         while (!q.empty()) {
-            Vertice* current = q.front();
+            Vertex* current = q.front();
             q.pop();
             cout << "Visited vertex " << current->nodeID << endl;
 
-            for (list<Vertice*>::iterator neighbor= current->neighbors.begin(); 
+            for (list<Vertex*>::iterator neighbor= current->neighbors.begin(); 
 				 neighbor!=current->neighbors.end(); ++neighbor) {
                 if (!(*neighbor)->visited) {
                     (*neighbor)->visited = true;
@@ -62,7 +62,7 @@ public:
 };
 
 int main() {
-    Vertice v0(0), v1(1), v2(2), v3(3), v4(4), v5(5);
+    Vertex v0(0), v1(1), v2(2), v3(3), v4(4), v5(5);
     Edge e1(&v0, &v1), e2(&v0, &v2), e3(&v1, &v3), e4(&v1, &v4), e5(&v2, &v4), e6(&v3, &v5);
 
     Graph g;

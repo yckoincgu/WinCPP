@@ -8,18 +8,18 @@ int superInt=INT_MAX/10;
 
 using namespace std;
 
-class Vertice {
+class Vertex {
 public:
     bool visited = false;
-    std::set<Vertice*> neighbors;
+    std::set<Vertex*> neighbors;
     int nodeID;
     int shortestDistanceFromStart;
 
-    Vertice(int nodeID) : nodeID(nodeID) {}
-    Vertice() {}
+    Vertex(int nodeID) : nodeID(nodeID) {}
+    Vertex() {}
     void printList() {
         std::cout << "Node " << nodeID << " has neighbors ";
-        for (std::set<Vertice*>::iterator it = neighbors.begin(); it != neighbors.end(); ++it) {
+        for (std::set<Vertex*>::iterator it = neighbors.begin(); it != neighbors.end(); ++it) {
             std::cout << (*it)->nodeID << ", ";
         }
         std::cout << std::endl;
@@ -44,10 +44,10 @@ public:
 template <typename T>
 class Graph {
 public:
-    std::set<T> vSet;
-    std::set<Edge<T>*> eSet;
-    Vertice* node;
-    Edge<Vertice*>** edges;
+    std::set<T> verticesSet;
+    std::set<Edge<T>*> edgesSet;
+    Vertex* node;
+    Edge<Vertex*>** edges;
     int rowCount, columnCount;
 
 
@@ -107,7 +107,7 @@ int main() {
 
 
     
-    Graph<Vertice*> g;     
+    Graph<Vertex*> g;     
     g.grapgInitilization();
     
     

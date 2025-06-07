@@ -75,8 +75,8 @@ class AxB{
 }; 
 
 int main() {
-	Matrix<int**> a(6,5);	// create object a
-	Matrix<int**> b(5,6);	// create object a
+	Matrix<int**> a(2,3);	// create object a
+	Matrix<int**> b(3,2);	// create object a
 	
 	AxB<int**> c(a,b);
 

@@ -5,17 +5,17 @@
 
 using namespace std;
 
-class Vertice {
+class Vertex {
 public:
     bool visited;
-    std::set<Vertice*> neighbors;
+    std::set<Vertex*> neighbors;
     int nodeID;
 
-    Vertice(int nodeID) : nodeID(nodeID), visited(false) {
+    Vertex(int nodeID) : nodeID(nodeID), visited(false) {
         std::cout << "Vertex created: " << nodeID << std::endl;
     }
 
-    void addNeighbor(Vertice* neighbor) {
+    void addNeighbor(Vertex* neighbor) {
         neighbors.insert(neighbor);
     }
 
@@ -25,7 +25,7 @@ public:
 
     void printNeighbors() const {
         std::cout << "Node " << nodeID << " has neighbors ";
-        for (Vertice* neighbor : neighbors) {
+        for (Vertex* neighbor : neighbors) {
             std::cout << neighbor->nodeID << ", ";
         }
         std::cout << std::endl;
@@ -34,9 +34,9 @@ public:
 
 class Edge {
 public:
-    std::set<Vertice*> vertices;
+    std::set<Vertex*> vertices;
 
-    Edge(Vertice* source, Vertice* destination) {
+    Edge(Vertex* source, Vertex* destination) {
         vertices.insert(source);
         vertices.insert(destination);
         source->addNeighbor(destination);
@@ -46,10 +46,10 @@ public:
 
 class Graph {
 public:
-    std::set<Vertice*> vertices;
-    std::set<std::set<Vertice*>> edges;
+    std::set<Vertex*> vertices;
+    std::set<std::set<Vertex*>> edges;
 
-    void addEdge(Vertice* source, Vertice* destination) {
+    void addEdge(Vertex* source, Vertex* destination) {
         Edge edge(source, destination);
         edges.insert(edge.vertices);
     }
@@ -65,8 +65,8 @@ public:
         return oddDegreeCount == 0 || oddDegreeCount == 2;
     }
 
-    Vertice* getStartVertice() const {
-        Vertice* start = nullptr;
+    Vertex* getStartVertice() const {
+        Vertex* start = nullptr;
         for (const auto& vertex : vertices) {
             if (vertex->degree() % 2 != 0) {
                 if (!start || vertex->degree() < start->degree()) {
@@ -81,8 +81,8 @@ public:
         return start;
     }
 
-    void printEulerPath(Vertice* startVertice) {
-        std::list<Vertice*> path;
+    void printEulerPath(Vertex* startVertice) {
+        std::list<Vertex*> path;
         findEulerPath(startVertice, path);
         for (auto it = path.begin(); it != path.end(); ++it) {
             auto nextIt = std::next(it);
@@ -93,10 +93,10 @@ public:
     }
 
 private:
-    void findEulerPath(Vertice* currentVertex, std::list<Vertice*>& path) {
+    void findEulerPath(Vertex* currentVertex, std::list<Vertex*>& path) {
         for (auto it = currentVertex->neighbors.begin(); it != currentVertex->neighbors.end();) {
-            Vertice* neighbor = *it;
-            std::set<Vertice*> edge = { currentVertex, neighbor };
+            Vertex* neighbor = *it;
+            std::set<Vertex*> edge = { currentVertex, neighbor };
             if (edges.find(edge) != edges.end()) {
                 edges.erase(edge);
                 currentVertex->neighbors.erase(it++);
@@ -111,7 +111,7 @@ private:
 };
 
 int main() {
-    Vertice v0(0), v1(1), v2(2), v3(3);
+    Vertex v0(0), v1(1), v2(2), v3(3);
 
     Graph g;
     g.vertices.insert(&v0);
@@ -125,7 +125,7 @@ int main() {
     g.addEdge(&v2, &v3);
 
     if (g.isEulerPath()) {
-        Vertice* start = g.getStartVertice();
+        Vertex* start = g.getStartVertice();
         g.printEulerPath(start);
     } else {
         std::cout << "This graph does not have an Euler path" << std::endl;

@@ -5,17 +5,17 @@
 
 using namespace std;
 
-class Vertice {
+class Vertex {
 public:
     bool visited = false;
-    list<Vertice*> neighbors;
+    list<Vertex*> neighbors;
     int nodeID;
 
-    Vertice(int nodeID) : nodeID(nodeID) {}
+    Vertex(int nodeID) : nodeID(nodeID) {}
 
     void printList() {
         cout << "Node " << nodeID << " has neighbors ";
-        for (list<Vertice*>::iterator it = neighbors.begin(); it != neighbors.end(); it++) {
+        for (list<Vertex*>::iterator it = neighbors.begin(); it != neighbors.end(); it++) {
             cout << (*it)->nodeID << ", ";
         }
         cout << endl;
@@ -37,11 +37,11 @@ public:
 template<typename T, typename U>
 class Graph {
 public:
-    set<T> vSet;
-    set<U> eSet;
+    set<T> verticesSet;
+    set<U> edgesSet;
 
     void bfs(T startVertex) {
-        if (vSet.find(startVertex) == vSet.end()) return;
+        if (verticesSet.find(startVertex) == verticesSet.end()) return;
         
         queue<T> q;
         startVertex->visited = true;
@@ -52,7 +52,7 @@ public:
             q.pop();
             cout << "Visited vertex " << current->nodeID << endl;
 
-            for (list<Vertice*>::iterator neighbor= current->neighbors.begin(); 
+            for (list<Vertex*>::iterator neighbor= current->neighbors.begin(); 
 						  neighbor!=current->neighbors.end(); ++neighbor) {
                 if (!(*neighbor)->visited) {
                     (*neighbor)->visited = true;
@@ -64,8 +64,8 @@ public:
 };
 
 int main() {
-    Vertice v0(0), v1(1), v2(2), v3(3), v4(4), v5(5);
-    Edge<Vertice*> 
+    Vertex v0(0), v1(1), v2(2), v3(3), v4(4), v5(5);
+    Edge<Vertex*> 
     e1(&v0, &v1), e11(&v1, &v0), 
     e2(&v0, &v2), e12(&v2, &v0), 
     e3(&v1, &v3), e13(&v3, &v1),
@@ -73,26 +73,26 @@ int main() {
     e5(&v2, &v4), e15(&v4, &v2),
     e6(&v3, &v5), e16(&v5, &v3);
 
-    Graph<Vertice*, Edge<Vertice*>*> g;
-    g.vSet.insert(&v0);
-    g.vSet.insert(&v1);
-    g.vSet.insert(&v2);
-    g.vSet.insert(&v3);
-    g.vSet.insert(&v4);
-    g.vSet.insert(&v5);
+    Graph<Vertex*, Edge<Vertex*>*> g;
+    g.verticesSet.insert(&v0);
+    g.verticesSet.insert(&v1);
+    g.verticesSet.insert(&v2);
+    g.verticesSet.insert(&v3);
+    g.verticesSet.insert(&v4);
+    g.verticesSet.insert(&v5);
 
-    g.eSet.insert(&e1);
-    g.eSet.insert(&e2);
-    g.eSet.insert(&e3);
-    g.eSet.insert(&e4);
-    g.eSet.insert(&e5);
-    g.eSet.insert(&e6);
-    g.eSet.insert(&e11);
-    g.eSet.insert(&e12);
-    g.eSet.insert(&e13);
-    g.eSet.insert(&e14);
-    g.eSet.insert(&e15);
-    g.eSet.insert(&e16);    
+    g.edgesSet.insert(&e1);
+    g.edgesSet.insert(&e2);
+    g.edgesSet.insert(&e3);
+    g.edgesSet.insert(&e4);
+    g.edgesSet.insert(&e5);
+    g.edgesSet.insert(&e6);
+    g.edgesSet.insert(&e11);
+    g.edgesSet.insert(&e12);
+    g.edgesSet.insert(&e13);
+    g.edgesSet.insert(&e14);
+    g.edgesSet.insert(&e15);
+    g.edgesSet.insert(&e16);    
 
     g.bfs(&v1);
 

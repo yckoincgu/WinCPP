@@ -8,18 +8,18 @@ int superInt=INT_MAX/10;
 
 using namespace std;
 
-class Vertice {
+class Vertex {
 public:
     bool visited = false;
-    std::set<Vertice*> neighbors;
+    std::set<Vertex*> neighbors;
     int nodeID;
     int shortestDistanceFromStart;
 
-    Vertice(int nodeID) : nodeID(nodeID) {}
-    Vertice() {}
+    Vertex(int nodeID) : nodeID(nodeID) {}
+    Vertex() {}
     void printList() {
         std::cout << "Node " << nodeID << " has neighbors ";
-        for (std::set<Vertice*>::iterator it = neighbors.begin(); it != neighbors.end(); ++it) {
+        for (std::set<Vertex*>::iterator it = neighbors.begin(); it != neighbors.end(); ++it) {
             std::cout << (*it)->nodeID << ", ";
         }
         std::cout << std::endl;
@@ -55,10 +55,10 @@ public:
 template <typename T>
 class Graph {
 public:
-    std::set<T> vSet;
-    std::set<Edge<T>*> eSet;
-    Vertice* node=nullptr;
-    Edge<Vertice*>** edges=nullptr;
+    std::set<T> verticesSet;
+    std::set<Edge<T>*> edgesSet;
+    Vertex* node=nullptr;
+    Edge<Vertex*>** edges=nullptr;
     int rowCount, columnCount;
 
     std::set<T> makeEdgeSignature(T startVertice, T endVertice){
@@ -96,23 +96,23 @@ public:
     bool findShortestPath(T startVertice){
        
 
-        if (vSet.find(startVertice) == vSet.end()) return false;
+        if (verticesSet.find(startVertice) == verticesSet.end()) return false;
         
         //bool flag=false;
         
-        queue<Vertice*> q;
+        queue<Vertex*> q;
         startVertice->shortestDistanceFromStart = 0;    // ****  initial setting  ***** 
         q.push(startVertice);
         int nextDistance;
 
         while (!q.empty()) {
-            Vertice* current = q.front();
+            Vertex* current = q.front();
             q.pop();
             printNodesShortest();
             cout << "current->nodeID   " << current->nodeID << std::endl;		
             cout << "current->neighbors.size()   " << current->neighbors.size() << std::endl;
             if(current->neighbors.size() == 0)	continue;
-            for (set<Vertice*>::iterator neighbor= current->neighbors.begin(); 
+            for (set<Vertex*>::iterator neighbor= current->neighbors.begin(); 
 				neighbor!=current->neighbors.end(); neighbor++) {
                 if((*neighbor) == startVertice) continue;   
                 //cout << " before (*neighbor)->shortestDistanceFromStart " << (*neighbor)->shortestDistanceFromStart<< std::endl;	
@@ -152,19 +152,19 @@ public:
         
         return true;
     }
-    void bfs(Vertice* startVertice) {
-        if (vSet.find(startVertice) == vSet.end()) return;
+    void bfs(Vertex* startVertice) {
+        if (verticesSet.find(startVertice) == verticesSet.end()) return;
         
-        queue<Vertice*> q;
+        queue<Vertex*> q;
         startVertice->visited = true;
         q.push(startVertice);
 
         while (!q.empty()) {
-            Vertice* current = q.front();
+            Vertex* current = q.front();
             q.pop();
             
             cout << "Visited vertex " << current->nodeID << endl;			
-            for (set<Vertice*>::iterator neighbor= current->neighbors.begin(); 
+            for (set<Vertex*>::iterator neighbor= current->neighbors.begin(); 
 				 neighbor!=current->neighbors.end(); ++neighbor) {
                 if (!(*neighbor)->visited) {
                     (*neighbor)->visited = true;
@@ -175,9 +175,9 @@ public:
     }
     
     void buildEdgeNeighbors() {
-        for (typename std::set<Edge<T>*>::iterator e1 = eSet.begin(); e1 != eSet.end(); ++e1) {
+        for (typename std::set<Edge<T>*>::iterator e1 = edgesSet.begin(); e1 != edgesSet.end(); ++e1) {
             std::cout<< "e1(" << (*e1)->p->nodeID<<"," <<(*e1)->q->nodeID<<") has neighbors: ";
-            for (typename std::set<Edge<T>*>::iterator e2 = eSet.begin(); e2 != eSet.end(); ++e2) {
+            for (typename std::set<Edge<T>*>::iterator e2 = edgesSet.begin(); e2 != edgesSet.end(); ++e2) {
                 if (*e1 != *e2  && (        // 
                     ((*e1)->p == (*e2)->p) ||
                     ((*e1)->p == (*e2)->q) ||
@@ -227,7 +227,7 @@ public:
         A.printMatrix();
 
         int nodeNumber=rowCount>columnCount?rowCount:columnCount;
-        node=new Vertice[nodeNumber];
+        node=new Vertex[nodeNumber];
         for(int i=0; i< nodeNumber; i++)
             node[i].nodeID=i;
 
@@ -235,11 +235,11 @@ public:
         for(int i=0; i< nodeNumber; i++){
             node[i].nodeID=i;
             node[i].shortestDistanceFromStart=-1;    // a value beyond scope
-            vSet.insert(&node[i]);
+            verticesSet.insert(&node[i]);
         }
-        edges=new Edge<Vertice*>*[rowCount];
+        edges=new Edge<Vertex*>*[rowCount];
         for(int i=0; i<rowCount; i++)
-            edges[i]=new Edge<Vertice*>[columnCount];
+            edges[i]=new Edge<Vertex*>[columnCount];
 
         for (int i = 0; i < rowCount; i++) {
             //std::cout << "edges row i = " << i << std::endl;
@@ -287,7 +287,7 @@ int main() {
 
 
     
-    Graph<Vertice*> g;     
+    Graph<Vertex*> g;     
     g.grapgInitilization();
     g.printEdgeTable();
     

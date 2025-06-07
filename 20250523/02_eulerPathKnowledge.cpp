@@ -6,25 +6,25 @@
 using namespace std;
 
 
-class Vertice{
+class Vertex{
 private:
 public:
     bool visited; 
-    std::set<Vertice*> neighbors;    // knowledge set
+    std::set<Vertex*> neighbors;    // knowledge set
 	/* <Vertice*> is used as <typename T> in teh whole program
 		templates provide type safety and flexibility 
 		raw pointers is efficient
 	*/
     int nodeID;  
 
-    Vertice(int nodeID):nodeID(nodeID){
+    Vertex(int nodeID):nodeID(nodeID){
       visited=false;
       std::cout<< "vertics is "<< nodeID << std::endl;
     };
     
-    void printVerticeNeighbors(){
+    void printVertexNeighbors(){
     	std::cout<<"Node "<< nodeID <<" has neighbors ";
-    	for(std::set<Vertice*>::iterator it=neighbors.begin(); it!=neighbors.end(); it++)
+    	for(std::set<Vertex*>::iterator it=neighbors.begin(); it!=neighbors.end(); it++)
 			std::cout<<(*it)->nodeID<<", ";
 		
 		std::cout<<std::endl;	
@@ -52,18 +52,18 @@ public:
 template <typename T>
 class Graph {
 	public:
-    std::set<T> vSet;
+    std::set<T> verticesSet;
     /*	std::set<Edge<T>* > eSet;   std::set<Edge<T> > eSet; 
     	Use space between closing angle brackets in std::set<Edge<T> > 
 		for older compiler compatibility.
 	*/ 
-	std::set<set<T> > eSet; // containing undirected edges with 2 vertices
+	std::set<set<T> > edgesSet; // containing undirected edges with 2 vertices
 
 	
 	bool isEulerPath(){		// definition
 		bool flag=false;
 		int oddVerticeNumber=0;
-		for(typename std::set<T>::iterator it=vSet.begin(); it!=vSet.end(); ++it)
+		for(typename std::set<T>::iterator it=verticesSet.begin(); it!=verticesSet.end(); ++it)
 			if((*it)->neighbors.size() % 2 != 0) oddVerticeNumber++;
 			 
 		std::cout<<"oddVerticeNumber is " << oddVerticeNumber<< endl;	
@@ -75,10 +75,10 @@ class Graph {
 		return flag;
 			
 	}	
-	T getStartVertice(){	// definition
+	T getStartVertex(){	// definition
 		T x;
 		unsigned long long min=UINT_MAX;
-		for(typename std::set<T>::iterator it=vSet.begin(); it!=vSet.end(); ++it)
+		for(typename std::set<T>::iterator it=verticesSet.begin(); it!=verticesSet.end(); ++it)
 			if((*it)->neighbors.size() % 2 != 0 && min > (*it)->neighbors.size()) {
 				min=(*it)->neighbors.size();
 				x=(*it);
@@ -89,20 +89,20 @@ class Graph {
 	void printEulerPath(T startVertice){	// design based on definition
 		T nextVertex;	// operation space
 		std::set<T> targetEdge; // knowledge set
-		for(typename std::set<T>::iterator it=vSet.begin(); it!=vSet.end(); ++it)
+		for(typename std::set<T>::iterator it=verticesSet.begin(); it!=verticesSet.end(); ++it)
 			if((*it)== startVertice) {
 				//std::cout<<(*startVertice).nodeID <<" has unvisited neighbors  ";
-				for(std::set<Vertice*>::iterator it=(*startVertice).neighbors.begin(); it!=(*startVertice).neighbors.end(); ++it){
+				for(std::set<Vertex*>::iterator it=(*startVertice).neighbors.begin(); it!=(*startVertice).neighbors.end(); ++it){
 					targetEdge.clear();
 					targetEdge.insert(startVertice); targetEdge.insert(*it);
-					if (eSet.find(targetEdge) != eSet.end()) {nextVertex=(*it); break;}
+					if (edgesSet.find(targetEdge) != edgesSet.end()) {nextVertex=(*it); break;}
 					//std::cout<<nextVertex->nodeID <<", ";
 				} 
 				//std::cout<<endl;
 			}
 			printEdges(startVertice, nextVertex);
-			eSet.erase(targetEdge);
-			if(!eSet.empty()) printEulerPath(nextVertex);
+			edgesSet.erase(targetEdge);
+			if(!edgesSet.empty()) printEulerPath(nextVertex);
 
 		}
 	
@@ -119,9 +119,9 @@ class Graph {
 
 int main() {
 	
-    Vertice v0(0), v1(1), v2(2), v3(3);
+    Vertex v0(0), v1(1), v2(2), v3(3);
     
-    Edge<Vertice*> 
+    Edge<Vertex*> 
     e1(&v0, &v1), e11(&v1, &v0),
     e2(&v0, &v2), e12(&v2, &v0),
     e3(&v1, &v2), e13(&v2, &v1),
@@ -130,24 +130,24 @@ int main() {
     //v1.printVerticeNeighbors();
     
     
-    Graph<Vertice*> g;
-    g.vSet.insert(&v0);
-    g.vSet.insert(&v1);
-    g.vSet.insert(&v2);
-    g.vSet.insert(&v3);
+    Graph<Vertex*> g;
+    g.verticesSet.insert(&v0);
+    g.verticesSet.insert(&v1);
+    g.verticesSet.insert(&v2);
+    g.verticesSet.insert(&v3);
     
 
 
-    g.eSet.insert(e1.undirectedEdge); g.eSet.insert(e11.undirectedEdge);
-    g.eSet.insert(e2.undirectedEdge); g.eSet.insert(e12.undirectedEdge);
-    g.eSet.insert(e3.undirectedEdge); g.eSet.insert(e13.undirectedEdge);
-    g.eSet.insert(e4.undirectedEdge); g.eSet.insert(e14.undirectedEdge);
+    g.edgesSet.insert(e1.undirectedEdge); g.edgesSet.insert(e11.undirectedEdge);
+    g.edgesSet.insert(e2.undirectedEdge); g.edgesSet.insert(e12.undirectedEdge);
+    g.edgesSet.insert(e3.undirectedEdge); g.edgesSet.insert(e13.undirectedEdge);
+    g.edgesSet.insert(e4.undirectedEdge); g.edgesSet.insert(e14.undirectedEdge);
 
 
 
-	Vertice* x;
+	Vertex* x;
 	if(g.isEulerPath()){
-		x=g.getStartVertice();
+		x=g.getStartVertex();
     	//std::cout<<"Double check the start vertice "<< x->nodeID <<endl;
     	g.printEulerPath(x);}
 	else std::cout<<"This is not a euler path"<<endl;
