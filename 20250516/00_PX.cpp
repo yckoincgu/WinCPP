@@ -2,17 +2,17 @@
 
 class Matrix {
 public:
-    int** A;  // The 2D array
+    int** A;  // The 2D array with heap storage
     int n, m; // Dimensions: rows (n) and columns (m)
 
-    Matrix(int n, int m) : n(n), m(m) {
-        A = new int*[n];
-        for (int i = 0; i < n; ++i) {
-            A[i] = new int[m];
+    Matrix(int rows, int column) : n(rows), m(column) {
+        A = new int*[rows];
+        for (int i = 0; i < rows; ++i) {
+            A[i] = new int[column];
         }
         int value = 0;
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < column; ++j) {
                 A[i][j] = value++;
             }
         }
@@ -44,11 +44,11 @@ public:
 };
 
 int main() {
-    Matrix a(6, 5);
+    Matrix a(2, 3);
     a.printMatrixDimension();
     a.printMatrix();
 
-    std::cout<< a.A[1][1]<< std::endl;
+    //std::cout<< a.A[1][1]<< std::endl;
 
     // Matrix destructor will automatically clean up the allocated memory
     return 0;

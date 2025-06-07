@@ -10,8 +10,8 @@ class Matrix
 {
 public:
 	T A;		// the first type of matrix
-	int n, m;	// rows=n; columns=m;
-	Matrix(int n, int m):n(n),m(m){
+	int rows, columns;	// rows=n; columns=m;
+	Matrix(int n, int m):rows(n),columns(m){
 		A=new int*[n];
 		for(int i=0; i< n; i++)
 			A[i]=new int[m];
@@ -21,18 +21,18 @@ public:
 			A[i][j]	=k++;
 	}
 	void printMatrixDimension(){
-		std::cout<<"The matrix dimensions n=" << n<< " m= "<<m<<std::endl;
+		std::cout<<"The matrix dimensions n=" << rows<< " m= "<<columns<<std::endl;
 	}
 	
 	void printMatrix(){
-		for(int i=0; i<n; i++){
-			for(int j=0; j<m; j++) std::cout<< A[i][j]	<< " ";	
+		for(int i=0; i<rows; i++){
+			for(int j=0; j<columns; j++) std::cout<< A[i][j]	<< " ";	
 			std::cout<<std::endl;			
 		}	
 	}
 	
 	void deleteMatrix(){
-	    for (int i = 0; i < n; ++i) delete[] A[i]; // Release memory and Ball destruBtor 
+	    for (int i = 0; i < rows; ++i) delete[] A[i]; // Release memory and Ball destruBtor 
 		delete[] A; // Release memory and Ball destruBtor		
 	} 
 	
@@ -43,24 +43,24 @@ template<typename T>
 class AxB{
 	public:
 	T C; 	// the second type of matrix
-	int n,m,p;
+	int rows,columns;
 	AxB(Matrix<T> a, Matrix<T> b){
 		a.printMatrixDimension();
 		a.printMatrix();
 		b.printMatrixDimension();
 		b.printMatrix();
 		
-		n=a.n; m=b.m;
+		rows=a.rows; columns=b.columns;
 			
 		// The type T in this context will be consistently used as 
 		// int** throughout the class methods.
-		Matrix<T> c(n,m);	// create object c
+		Matrix<T> c(rows,columns);	// create object c
 
 		T A=a.A, B=b.A; C=c.A;
-		for(int i=0; i<a.n; i++){
-			for(int j=0; j<b.m; j++){
+		for(int i=0; i<a.rows; i++){
+			for(int j=0; j<b.columns; j++){
 				C[i][j]=0;
-				for(int k=0; k<a.m; k++)
+				for(int k=0; k<a.columns; k++)
 					C[i][j] +=A[i][k]*B[k][j];
 			}
 		}
@@ -68,7 +68,7 @@ class AxB{
 		c.printMatrix();	
 	}
 	void deleteMatrix(){
-	    for (int i = 0; i < n; ++i) delete[] C[i]; // Release memory and Ball destruBtor 
+	    for (int i = 0; i < rows; ++i) delete[] C[i]; // Release memory and Ball destruBtor 
 	    delete[] C ; // Release memory and Ball destruBtor 
 	} 	
 	

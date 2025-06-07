@@ -10,13 +10,13 @@ class Matrix
 {
 public:
 	T A;		// the first type of matrix
-	int n, m;	// rows=n; columns=m;
+	int rows, columns;	// rows=n; columns=m;
 	/*
 		In C++, you cannot directly use variable-length arrays (VLAs) 
 		like int[x][y] where x and y are variables for the dimensions of 
 		the array, as the size of arrays must be a constant expression. 
 	*/
-	Matrix(int n, int m):n(n),m(m){
+	Matrix(int n, int m):rows(n),columns(m){
 		A=new int*[n];	// A points to the first element of an array of int* (row pointers)
 		for(int i=0; i< n; i++)
 			A[i]=new int[m];
@@ -28,18 +28,18 @@ public:
 		printMatrix();			
 	}
 	void printMatrixDimension(){
-		std::cout<<"The matrix dimensions n=" << n<< " m= "<<m<<std::endl;
+		std::cout<<"The matrix dimensions n=" << rows<< " m= "<<columns<<std::endl;
 	}
 	
 	void printMatrix(){
-		for(int i=0; i<n; i++){
-			for(int j=0; j<m; j++) std::cout<< A[i][j]	<< " ";	
+		for(int i=0; i<rows; i++){
+			for(int j=0; j<columns; j++) std::cout<< A[i][j]	<< " ";	
 			std::cout<<std::endl;			
 		}	
 	}
 	
 	void deleteMatrix(){
-	    for (int i = 0; i < n; ++i) delete[] A[i]; // Release memory and Ball destruBtor 
+	    for (int i = 0; i < rows; ++i) delete[] A[i]; // Release memory and Ball destruBtor 
 		delete[] A; // Release memory and Ball destruBtor		
 	} 
 	

@@ -57,7 +57,7 @@ class Graph {
     	Use space between closing angle brackets in std::set<Edge<T> > 
 		for older compiler compatibility.
 	*/ 
-	std::set<set<T> > eSet; // containing undirected edges with 2 vertices
+	std::set<set<T>> eSet; // containing undirected edges with 2 vertices
 
 	
 	bool isEulerPath(){		// definition
@@ -131,7 +131,7 @@ int main() {
     
     
     Graph<Vertice*> g;
-    g.vSet.insert(&v0);
+    g.vSet.insert(&v0);	
     g.vSet.insert(&v1);
     g.vSet.insert(&v2);
     g.vSet.insert(&v3);

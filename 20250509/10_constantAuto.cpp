@@ -27,6 +27,7 @@ int main() {
 
     // Split the input string
     std::vector<std::string> wordsInVector = buildVector(input, delimiter);
+    
 
     // Print each token using a range-based for loop
     int index = 0;
