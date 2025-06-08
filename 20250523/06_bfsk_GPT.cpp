@@ -46,7 +46,7 @@ public:
         q.push(startVertex);
 
         while (!q.empty()) {
-            Vertex* current = q.front();
+            Vertex* current = q.front();    //A queue follows a First-In, First-Out (FIFO) principle
             q.pop();
             cout << "Visited vertex " << current->nodeID << endl;
 
