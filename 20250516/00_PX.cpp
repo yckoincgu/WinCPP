@@ -5,14 +5,14 @@ public:
     int** A;  // The 2D array with heap storage
     int n, m; // Dimensions: rows (n) and columns (m)
 
-    Matrix(int rows, int column) : n(rows), m(column) {
+    Matrix(int rows, int columns) : n(rows), m(columns) {
         A = new int*[rows];
         for (int i = 0; i < rows; ++i) {
-            A[i] = new int[column];
+            A[i] = new int[columns];
         }
         int value = 0;
         for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < column; ++j) {
+            for (int j = 0; j < columns; ++j) {
                 A[i][j] = value++;
             }
         }
@@ -48,7 +48,8 @@ int main() {
     a.printMatrixDimension();
     a.printMatrix();
 
-    //std::cout<< a.A[1][1]<< std::endl;
+    
+    // std::cout<< a.A[1][1]<< std::endl;
 
     // Matrix destructor will automatically clean up the allocated memory
     return 0;

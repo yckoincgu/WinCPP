@@ -44,7 +44,7 @@ class AxB{
 	public:
 	T C; 	// the second type of matrix
 	int rows,columns;
-	AxB(Matrix<T> a, Matrix<T> b){		// passing by value
+	AxB(Matrix<T>& a, Matrix<T>& b){        // passing by reference
 		a.printMatrixDimension();
 		a.printMatrix();
 		b.printMatrixDimension();
