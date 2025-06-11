@@ -11,7 +11,7 @@ private:
 public:
     bool visited; 
     std::set<Vertex*> neighbors;    // knowledge set
-	/* <Vertice*> is used as <typename T> in teh whole program
+	/* <Vertice*> is used as <typename T> in the whole program
 		templates provide type safety and flexibility 
 		raw pointers is efficient
 	*/
@@ -119,7 +119,7 @@ class Graph {
 
 int main() {
 	
-    Vertex v0(0), v1(1), v2(2), v3(3);
+    Vertex v0(0), v1(1), v2(2), v3(3);		// user designed class
     
     Edge<Vertex*> 
     e1(&v0, &v1), e11(&v1, &v0),
