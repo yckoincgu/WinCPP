@@ -40,9 +40,8 @@ public:
 
 
 template<typename T>
-class AxB: public Matrix<T>{   // AxB inherits from Matrix<T> 
+class AxB: public Matrix<T>{    // inherited
 	public:
-	T C; 	// the second type of matrix
 	int rows,columns;
 	AxB(Matrix<T>& a, Matrix<T>& b) : Matrix<T>(a.rows, b.columns) 
     {        // passing by reference
@@ -57,7 +56,7 @@ class AxB: public Matrix<T>{   // AxB inherits from Matrix<T>
 		// int** throughout the class methods.
 		Matrix<T> c(rows,columns);	// create object c
 
-		T A=a.A, B=b.A; C=c.A;
+		T A=a.A, B=b.A, C=c.A;
 		for(int i=0; i<a.rows; i++){
 			for(int j=0; j<b.columns; j++){
 				C[i][j]=0;
@@ -66,12 +65,9 @@ class AxB: public Matrix<T>{   // AxB inherits from Matrix<T>
 			}
 		}
 		c.printMatrixDimension();
-		c.printMatrix();	
+		c.printMatrix();
 	}
-	void deleteMatrix(){
-	    for (int i = 0; i < rows; ++i) delete[] C[i]; // Release memory and Ball destruBtor 
-	    delete[] C ; // Release memory and Ball destruBtor 
-	} 	
+
 	
 }; 
 
