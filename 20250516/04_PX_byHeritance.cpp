@@ -40,7 +40,7 @@ public:
 
 
 template<typename T>
-class AxB: public Matrix<T>{
+class AxB: public Matrix<T>{   // AxB inherits from Matrix<T> 
 	public:
 	T C; 	// the second type of matrix
 	int rows,columns;
