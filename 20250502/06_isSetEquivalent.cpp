@@ -25,7 +25,7 @@ int* sort(int *arr, int n)
 
 // Function to check if both arrays are equal
 bool isSetEquivalent(int* A, int* B,
-				int n, int m)
+				     int  n, int  m)
 {
 	// If lengths of array are not equal
 	// means array are not equal
