@@ -7,12 +7,12 @@ using namespace std;
 // reverse digits of num 
 int reverseDigits(int num) 
 { 
-	int new_num = 0; 
+	int x = 0; 
 	while (num > 0) { 
-		new_num = new_num * 10 + num % 10; 
+		x = x * 10 + num % 10; 
 		num = num / 10; 
 	} 
-	return new_num; 
+	return x; 
 } 
 
 // Driver code 
