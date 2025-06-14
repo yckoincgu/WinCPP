@@ -1,11 +1,11 @@
 #include <iostream>
 // 
 /*
-polymorphism 
-1. Polymorphism allows for code changes at running time
-specifically, (runtime polymorphism achieved through virtual functions 
-and base class pointers/references) 
-enables the dynamic dispatch of function calls. 
+runtime polymorphism 
+1. It allows for code changes at running time.
+   specifically (achieved through virtual functions 
+   and base class pointers/references)
+   enables the dynamic dispatch of function calls. 
 2. virtual table
 3. Polymorphism and plugin have tightly relationship and scenario
 */
