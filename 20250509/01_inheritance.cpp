@@ -9,7 +9,7 @@ public:
     std::string name; // Every person has a name
 
     // Constructor for Person
-    Person(const std::string& n) : name(n) {
+    Person(const std::string& nameArg) : name(nameArg) {
         std::cout << "Person constructor called for: " << name << std::endl;
     }
 
@@ -20,7 +20,7 @@ public:
 
     // Virtual destructor for proper polymorphic cleanup (good practice in base classes)
     virtual ~Person() {
-        std::cout << "Person destructor called for: " << name << std::endl;
+        std::cout << "Person Virtual destructor called for: " << name << std::endl;
     }
 };
 
@@ -34,8 +34,8 @@ public:
 
     // Constructor for Student
     // It must call the base class (Person) constructor
-    Student(const std::string& n, const std::string& studentId, const std::string& deptId)
-        : Person(n), // Call base class Person's constructor to initialize 'name'
+    Student(const std::string& name, const std::string& studentId, const std::string& deptId)
+        : Person(name), // Call base class Person's constructor to initialize 'name'
           id(studentId),
           departmentId(deptId)
     {
