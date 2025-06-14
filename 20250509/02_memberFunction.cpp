@@ -4,7 +4,7 @@
 #include <iostream>  
 using namespace std; 
 
-class Student 
+class Person 
 { 
 	public: 
 	string name; 
@@ -21,7 +21,7 @@ class Student
 }; 
 
 // Definition of printname using scope resolution operator :: 
-void Student::printname() 
+void Person::printname() 
 { 
 	cout <<"student name is: "<<name; 
 } 
@@ -29,7 +29,7 @@ void Student::printname()
 
 int main() { 
 	
-	Student student; 
+	Person student; 
 	student.name = "xyz"; 
 	student.id=15; 
 	

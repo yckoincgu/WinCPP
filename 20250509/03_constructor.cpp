@@ -1,21 +1,21 @@
 // C++ program to demonstrate constructors 
 #include <bits/stdc++.h> 
 using namespace std; 
-class Student 
+class Person 
 { 
 	public: 
 	std::string name;
 	int id; 
 	
 	//Default Constructor 
-	Student() 
+	Person() 
 	{ 
 		cout << "Default Constructor called" << endl; 
 		id=-1; 
 	} 
 	
 	//Parameterized Constructor 
-	Student(std::string name, int id):name(name), id(id) 		// :name(name), id(id) mean this.name=name, this.id=id
+	Person(std::string name, int id):name(name), id(id) 		// :name(name), id(id) mean this.name=name, this.id=id
 	{ 
 		cout <<"Parameterized Constructor called "<< endl; 
 
@@ -25,11 +25,11 @@ class Student
 int main() { 
 	
 	// student will call Default Constructor 
-	Student student_1; 
+	Person student_1; 
 	cout <<"student_1 id is: "<< student_1.id << endl; 
 	
 	// student_2 will call Parameterized Constructor 
-	Student* student_2=new Student(); 
+	Person* student_2=new Person(); 
 	cout <<"student_2 name is: " <<student_2->name << endl;
 	cout <<"student_2 id is: " <<student_2->id << endl; 
 	

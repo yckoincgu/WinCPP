@@ -2,7 +2,7 @@
 #include <iostream> 
 using namespace std; 
 
-class Student { 
+class Person { 
 public: // Access specifier 
 	// Data Members 
 	string name; 	// class member
@@ -11,7 +11,7 @@ public: // Access specifier
 }; 
 int main() 
 { 
-	Student student_1, student_2; 		// Declare an object named student 
+	Person student_1, student_2; 		// Declare an object named student 
 	student_1.name = "John"; 	// accessing data member
 	student_1.printname(); 	// accessing member function 
 
