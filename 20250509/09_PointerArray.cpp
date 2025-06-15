@@ -12,7 +12,7 @@ int getWordsNumber(std::string& line, char delimiter){
 	return i;
 } 
 
-void showPointerArray(std::string line, char delimiter){
+void showPointerArray(std::string& line, char delimiter){
 	
 	int n=getWordsNumber(line, delimiter);
 	
