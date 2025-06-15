@@ -6,6 +6,7 @@
 // allowing you to store a sequence of elements that can grow or shrink in size.
 template <typename T>
 void printVectorGeneric(T elements){
+
     // Access elements of the vector using index
     std::cout << "First element: " << elements[0] << std::endl;
     std::cout << "Second element: " << elements[1] << std::endl;

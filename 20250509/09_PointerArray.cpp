@@ -3,7 +3,7 @@
 #include <sstream>
 
 
-int getWordsNumber(std::string line, char delimiter){
+int getWordsNumber(std::string& line, char delimiter){
 	int i=1;
 	std::stringstream x(line);
 	std::string words;
