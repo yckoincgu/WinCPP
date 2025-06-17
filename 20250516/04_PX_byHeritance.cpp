@@ -40,17 +40,16 @@ public:
 
 
 template<typename T>
-class AxB: public Matrix<T>{    // inherited
+class AxB: public Matrix<T>{    //  public Matrix<T> inherited from parent
 	public:
 	int rows,columns;
-	AxB(Matrix<T>& a, Matrix<T>& b) : Matrix<T>(a.rows, b.columns) 
+	AxB(Matrix<T>& a, Matrix<T>& b) : Matrix<T>(a.rows, b.columns),  // parent constructor
+									  rows(a.rows), columns(b.columns) // assigning members with parameters
     {        // passing by reference
 		a.printMatrixDimension();
 		a.printMatrix();
 		b.printMatrixDimension();
 		b.printMatrix();
-		
-		rows=a.rows; columns=b.columns;
 			
 		// The type T in this context will be consistently used as 
 		// int** throughout the class methods.
