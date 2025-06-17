@@ -12,12 +12,12 @@ runtime polymorphism
 class Operation {
 public:
     virtual int perform(int a, int b) const = 0;
-    virtual ~Operation() {}
+    virtual ~Operation() {}     // deconstruct 
 };
 
 class MultiplyOperation : public Operation {
 public:
-    int perform(int a, int b) const override {
+    int perform(int a, int b) const override {  // override tells compiler to find virtual operation
         return a * b;
     }
 };
@@ -30,7 +30,7 @@ public:
 };
 
 int main() {
-    Operation* op_ptr = nullptr; // Initialize to nullptr
+    Operation* operation_ptr = nullptr; // Initialize to nullptr
 
     // Scenario 1: Decision at runtime based on user input or some logic
     int choice;
@@ -39,9 +39,9 @@ int main() {
     std::cin >> choice;
 
     if (choice == 1) {
-        op_ptr = new MultiplyOperation();
+        operation_ptr = new MultiplyOperation();
     } else if (choice == 2) {
-        op_ptr = new AddOperation();
+        operation_ptr = new AddOperation();
     } else {
         std::cout << "Invalid choice. Exiting.\n";
         return 1;
@@ -50,9 +50,9 @@ int main() {
     // At this point, we don't know at compile time whether op_ptr points to
     // a MultiplyOperation or an AddOperation.
     // The decision of WHICH perform() to call is made NOW, at runtime.
-    std::cout << "Result: " << op_ptr->perform(10, 5) << std::endl;
+    std::cout << "Result: " << operation_ptr->perform(10, 5) << std::endl;
 
-    delete op_ptr; // Polymorphic cleanup
+    delete operation_ptr; // Polymorphic cleanup
 
     return 0;
 }

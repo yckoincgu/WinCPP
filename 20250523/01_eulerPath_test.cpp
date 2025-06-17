@@ -11,7 +11,7 @@ private:
 public:
     bool visited; 
     std::set<Vertex*> neighbors;    // knowledge set
-	/* <Vertice*> is used as <typename T> in teh whole program
+	/* <Vertice*> is used as <typename T> in the whole program
 		templates provide type safety and flexibility 
 		raw pointers is efficient
 	*/
@@ -19,7 +19,7 @@ public:
 
     Vertex(int nodeID):nodeID(nodeID){
       visited=false;
-      std::cout<< "vertics is "<< nodeID << std::endl;
+      std::cout<< "vertex is "<< nodeID << std::endl;
     };
     
     void printVertexNeighbors(){
@@ -35,7 +35,7 @@ template <typename T>
 class Edge{
 public:
     T p,q;
-    std::set<T> twoNodes;	// no directions, data structure
+    std::set<Vertex*> twoNodes;	// no directions, data structure
     
     Edge(T source_V, T destinate_V):p(source_V),  q(destinate_V)
     {
@@ -57,7 +57,7 @@ class Graph {
     	Use space between closing angle brackets in std::set<Edge<T> > 
 		for older compiler compatibility.
 	*/ 
-	std::set<set<T> > edgesSet; // containing undirected edges with 2 vertices
+	std::set<set<T>*> edgesSet; // containing undirected edges with 2 vertices
 
 	
 	bool isEulerPath(){		// definition
@@ -95,7 +95,7 @@ class Graph {
 				for(std::set<Vertex*>::iterator it=(*startVertice).neighbors.begin(); it!=(*startVertice).neighbors.end(); ++it){
 					targetEdge.clear();
 					targetEdge.insert(startVertice); targetEdge.insert(*it);
-					if (edgesSet.find(targetEdge) != edgesSet.end()) {nextVertex=(*it); break;}
+					if (edgesSet.find(targetEdge) != edgesSet.end()) {nextVertex=(it); break;}
 					//std::cout<<nextVertex->nodeID <<", ";
 				} 
 				//std::cout<<endl;
@@ -119,29 +119,29 @@ class Graph {
 
 int main() {
 	
-    Vertex v0(0), v1(1), v2(2), v3(3);
+    Vertex v0(0), v1(1), v2(2), v3(3);		// user designed class
     
     Edge<Vertex*> 
-    e1(&v0, &v1), e11(&v1, &v0),
-    e2(&v0, &v2), e12(&v2, &v0),
-    e3(&v1, &v2), e13(&v2, &v1),
-    e4(&v2, &v3), e14(&v3, &v2);
+    e1(&v0, &v1), e1Reverse(&v1, &v0),
+    e2(&v0, &v2), e2Reverse(&v2, &v0),
+    e3(&v1, &v2), e3Reverse(&v2, &v1),
+    e4(&v2, &v3), e4Reverse(&v3, &v2);
     //v0.printVerticeNeighbors();
     //v1.printVerticeNeighbors();
     
     
     Graph<Vertex*> g;
-    g.verticesSet.insert(&v0);
+    g.verticesSet.insert(&v0);	
     g.verticesSet.insert(&v1);
     g.verticesSet.insert(&v2);
     g.verticesSet.insert(&v3);
     
 
 
-    g.edgesSet.insert(e1.twoNodes); g.edgesSet.insert(e11.twoNodes);
-    g.edgesSet.insert(e2.twoNodes); g.edgesSet.insert(e12.twoNodes);
-    g.edgesSet.insert(e3.twoNodes); g.edgesSet.insert(e13.twoNodes);
-    g.edgesSet.insert(e4.twoNodes); g.edgesSet.insert(e14.twoNodes);
+    g.edgesSet.insert(&e1.twoNodes); g.edgesSet.insert(&e1Reverse.twoNodes);
+    g.edgesSet.insert(&e2.twoNodes); g.edgesSet.insert(&e1Reverse.twoNodes);
+    g.edgesSet.insert(&e3.twoNodes); g.edgesSet.insert(&e1Reverse.twoNodes);
+    g.edgesSet.insert(&e4.twoNodes); g.edgesSet.insert(&e1Reverse.twoNodes);
 
 
 
@@ -152,11 +152,6 @@ int main() {
     	g.printEulerPath(x);}
 	else std::cout<<"This is not a euler path"<<endl;
     
-
-
-    int i;
-    std::cin >> i;
- 
 
 
   return 0;

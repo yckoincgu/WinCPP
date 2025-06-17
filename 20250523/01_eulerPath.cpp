@@ -35,13 +35,13 @@ template <typename T>
 class Edge{
 public:
     T p,q;
-    std::set<T> undirectedEdge;	// no directions, data structure
+    std::set<T> twoNodes;	// no directions, data structure
     
     Edge(T source_V, T destinate_V):p(source_V),  q(destinate_V)
     {
         p->neighbors.insert(q);
         q->neighbors.insert(p);
-		undirectedEdge.insert(p); undirectedEdge.insert(q);
+		twoNodes.insert(p); twoNodes.insert(q);
         //std::cout<< "E q is "<< q->nodeID << std::endl;        
     };
 
@@ -138,10 +138,10 @@ int main() {
     
 
 
-    g.edgesSet.insert(e1.undirectedEdge); g.edgesSet.insert(e11.undirectedEdge);
-    g.edgesSet.insert(e2.undirectedEdge); g.edgesSet.insert(e12.undirectedEdge);
-    g.edgesSet.insert(e3.undirectedEdge); g.edgesSet.insert(e13.undirectedEdge);
-    g.edgesSet.insert(e4.undirectedEdge); g.edgesSet.insert(e14.undirectedEdge);
+    g.edgesSet.insert(e1.twoNodes); g.edgesSet.insert(e11.twoNodes);
+    g.edgesSet.insert(e2.twoNodes); g.edgesSet.insert(e12.twoNodes);
+    g.edgesSet.insert(e3.twoNodes); g.edgesSet.insert(e13.twoNodes);
+    g.edgesSet.insert(e4.twoNodes); g.edgesSet.insert(e14.twoNodes);
 
 
 
