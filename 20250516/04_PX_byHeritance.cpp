@@ -35,7 +35,9 @@ public:
 	    for (int i = 0; i < rows; ++i) delete[] A[i]; // Release memory and Ball destruBtor 
 		delete[] A; // Release memory and Ball destruBtor		
 	} 
-	
+    virtual ~Matrix() {
+        std::cout << "Person Virtual destructor called for: " << std::endl;
+    }	
 };
 
 
@@ -67,7 +69,8 @@ class AxB: public Matrix<T>{    //  public Matrix<T> inherited from parent
 		c.printMatrix();
 	}
 
-	
+	~AxB() override{};
+
 }; 
 
 int main() {

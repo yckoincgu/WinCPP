@@ -14,9 +14,7 @@ char max(char a, char b) {
 }
 
 int main() {
-    std::cout << max(3, 5) << std::endl;          // Calls int version
-    std::cout << max(3.14, 2.71) << std::endl;    // Calls double version
-    std::cout << max('a', 'z') << std::endl;      // Calls char version
+
     
     return 0;
 }

@@ -1,57 +1,42 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <vector>
+#include <iostream> // For std::cout
+// #include <bits/stdc++.h> // Avoid using this non-standard header in production code
+using namespace std; 
 
+// Helper recursive function that takes an accumulator 'reversed_num'
+int reverseDigitsRecursiveHelper(int num, int reversed_num) {
+    // Base case: If the original number becomes 0, we've processed all digits
+    if (num == 0) {
+        return reversed_num;
+    }
 
-int main() {
-	std::string inputLine= "Hello world This is a test", 	// a container with string
-	word;
+    // Recursive step:
+    // 1. Get the last digit of num (num % 10)
+    // 2. Add it to reversed_num (after shifting reversed_num left by one decimal place)
+    // 3. Remove the last digit from num (num / 10)
+    return reverseDigitsRecursiveHelper(num / 10, reversed_num * 10 + num % 10);
+}
 
-	//std::getline(std::cin, inputLine);	// get an input line
+// Public wrapper function to start the recursion with a clean state
+int reverseDigits(int num) {
+    // Handle negative numbers if desired (e.g., reverse -123 to -321)
+    // For simplicity, this example assumes positive numbers as per original code.
+    // If num is 0, the helper function will immediately return 0.
+    return reverseDigitsRecursiveHelper(num, 0);
+}
 
+// Driver code 
+int main() { 
+    int num1 = 123; 
+    cout << "Reverse of " << num1 << " is " << reverseDigits(num1) << endl; 
 
-	std::vector<std::string> words;
-	/*
-	std::vector
-	A container (data structure) to store objects
-	providing dynamic array functionality
-	std::vector<std::string>
-	a dynamic array that can store strings. 
+    int num2 = 98765;
+    cout << "Reverse of " << num2 << " is " << reverseDigits(num2) << endl;
 
-	std is a namespace to identifying groups
-	*/
-	std::istringstream iss(inputLine); 
-	/*
-	std::istringstream, It prepares the stream for parsing
-	iss is an object containing inputline string but it is not a container
-	it can read data, does not change data, support formated extraction, Tokenize/convert strings, etc.
-	*/
-	std::cout << "The first approach as below:  "<< std::endl;
-	while(iss >> word)
-		std::cout << word << std::endl;	
-	
-	std::cout << std::endl;
-	std::cout << "The second approach as below:  "<< std::endl;
-	// Rewind the stream to read again
-    iss.clear();                   // Clear any error flags (e.g., eof)
-    iss.seekg(0);                  // Reset read position to start
-	int wordsLength=0;
-	while (std::getline(iss, word, ' ')) {
-		// parsing inputLine into words 
-		std::cout << word << std::endl;
-		words.push_back(word);
-		wordsLength++;
-	}
+    int num3 = 100; // Test with trailing zeros
+    cout << "Reverse of " << num3 << " is " << reverseDigits(num3) << endl;
 
-	
-	for (int i=0; i< wordsLength; i++) {
-		std::cout << words.at(i) << " ";
-	}
-	std::cout << std::endl;
-
-	
-
-	
-    return 0;
+    int num4 = 0; // Test with zero
+    cout << "Reverse of " << num4 << " is " << reverseDigits(num4) << endl;
+    
+    return 0; 
 }
