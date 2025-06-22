@@ -3,15 +3,17 @@
 #include <fstream>
 #include <string>
 
+
 using namespace std;
 
 template <typename T>
 class Matrix {
-public:
+protected:
     T dynamicMatrix;
     int rows, columns;
     string errorInformation;
     
+public:
     Matrix(std::ifstream& inputFile) {
         string line, word;
         rows = 0, columns = 0;
@@ -42,7 +44,6 @@ public:
         }             
     }
 
-    // Constructor for creating empty matrix
     Matrix(int rows, int cols) : rows(rows), columns(cols) {
         dynamicMatrix = new int*[rows];
         for(int i = 0; i < rows; i++) {
@@ -52,6 +53,11 @@ public:
             }
         }
     }
+
+    // Add public accessor methods
+    int getRows() const { return rows; }
+    int getColumns() const { return columns; }
+    T getMatrixData() const { return dynamicMatrix; }
 
     void printMatrixDimension() const {
         cout << "Matrix dimensions: " << rows << "x" << columns << endl;
@@ -65,46 +71,38 @@ public:
         }    
     }
     
-    void deleteMatrix() {
+    virtual ~Matrix() {
         for(int i = 0; i < rows; ++i) delete[] dynamicMatrix[i];
         delete[] dynamicMatrix;        
-    } 
-    
-    virtual ~Matrix() {
-        deleteMatrix();
     }    
 };
 
 template<typename T>
-class AxB {
-private:
-    Matrix<T> result;
-    
+class AxB : public Matrix<T> {
 public:
-    AxB(Matrix<T>& a, Matrix<T>& b) : result(a.rows, b.columns) {
+    AxB(const Matrix<T>& a, const Matrix<T>& b) : 
+        Matrix<T>(a.getRows(), b.getColumns()) {
+            
         a.printMatrixDimension();
         a.printMatrix();
         b.printMatrixDimension();
         b.printMatrix();
             
-        T A = a.dynamicMatrix, B = b.dynamicMatrix;
-        for(int i = 0; i < a.rows; i++) {
-            for(int j = 0; j < b.columns; j++) {
-                result.dynamicMatrix[i][j] = 0;
-                for(int k = 0; k < a.columns; k++) {
-                    result.dynamicMatrix[i][j] += A[i][k] * B[k][j];
+        T A = a.getMatrixData();
+        T B = b.getMatrixData();
+        
+        for(int i = 0; i < a.getRows(); i++) {
+            for(int j = 0; j < b.getColumns(); j++) {
+                this->dynamicMatrix[i][j] = 0;
+                for(int k = 0; k < a.getColumns(); k++) {
+                    this->dynamicMatrix[i][j] += A[i][k] * B[k][j];
                 }
             }
         }
     }
 
-    const Matrix<T>& getResult() const {
-        return result;
-    }
-
-    void printResult() const {
-        result.printMatrixDimension();
-        result.printMatrix();
+    virtual ~AxB() {
+        cout << "AxB destructor called" << endl;
     }
 };
 
@@ -117,7 +115,8 @@ int main() {
         Matrix<int**> b(inputBfile);
         
         AxB<int**> axb(a, b);
-        axb.printResult();
+        axb.printMatrixDimension();
+        axb.printMatrix();
         
         inputAfile.close();
         inputBfile.close();
