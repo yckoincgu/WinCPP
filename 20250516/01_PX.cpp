@@ -54,10 +54,10 @@ int main() {
 		each pointing to an array of integers, 
 		thus requiring the int** type to represent this structure correctly.
 	*/
-	Matrix<int**> a(3,5);	// int** A, It means A becomes int**
-							// The first * (int*) refers to the fact that A itself
-							// The second * (int) refers to the fact that each element 
-							//     in that array of int* (e.g., A[i])
+	Matrix<int**> a(3,5);	// int** A, It means A is 2D integer array
+							// (int**): Points to the first element of array A.
+							// (int*): Points to the first element of a row (array A).
+							// A[i][j] (int): The actual integer element
 	Matrix<int**> b(5,3);
 	
 	a.deleteMatrix();
