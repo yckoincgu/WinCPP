@@ -29,49 +29,47 @@ public:
 			for(int j=0; j<columns; j++) std::cout<< A[i][j]	<< " ";	
 			std::cout<<std::endl;			
 		}	
+        std::cout<<std::endl;
 	}
 	
 	void deleteMatrix(){
 	    for (int i = 0; i < rows; ++i) delete[] A[i]; // Release memory and Ball destruBtor 
 		delete[] A; // Release memory and Ball destruBtor		
 	} 
-	
+    virtual ~Matrix() {
+        std::cout << "Person Virtual destructor called for: " << std::endl;
+    }	
 };
 
 
-template<typename T>
-class AxB{
+template<typename T>            // This template is necessary due to parent
+class AxB: public Matrix<T>{    // public Matrix<T> inherited from parent
 	public:
-	T C; 	// the second type of matrix
-	int rows,columns;
-	AxB(Matrix<T>& a, Matrix<T>& b){        // passing by reference
-		a.printMatrixDimension();
+	//int rows,columns;
+	AxB(Matrix<T>& a, Matrix<T>& b) : Matrix<T>(a.rows, b.columns)  // parent constructor
+    {        
+		a.printMatrixDimension();   // passing by reference
 		a.printMatrix();
 		b.printMatrixDimension();
 		b.printMatrix();
-		
-		rows=a.rows; columns=b.columns;
-			
-		// The type T in this context will be consistently used as 
-		// int** throughout the class methods.
-		Matrix<T> c(rows,columns);	// create object c
 
-		T A=a.A, B=b.A; C=c.A;
-		for(int i=0; i<a.rows; i++){
-			for(int j=0; j<b.columns; j++){
-				C[i][j]=0;
+        this->rows=a.rows; this->columns=b.columns;     // inherited from parent by using "this" to make deferring
+			
+		for(int i=0; i<this->rows; i++){
+			for(int j=0; j<this->columns; j++){
+				this->A[i][j]=0;                // Before instantiation, template data type is unknown; 
+                                                // At instantiation, it is known by deferring parent A
 				for(int k=0; k<a.columns; k++)
-					C[i][j] +=A[i][k]*B[k][j];
+					this->A[i][j] +=a.A[i][k]*b.A[k][j];
 			}
 		}
-		c.printMatrixDimension();
-		c.printMatrix();	
+
+        std::cout<<"The result of A x B is "<<std::endl;
+		this->printMatrix();
 	}
-	void deleteMatrix(){
-	    for (int i = 0; i < rows; ++i) delete[] C[i]; // Release memory and Ball destruBtor 
-	    delete[] C ; // Release memory and Ball destruBtor 
-	} 	
-	
+
+	~AxB() override{};
+
 }; 
 
 int main() {
