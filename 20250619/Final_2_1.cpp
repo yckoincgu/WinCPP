@@ -87,12 +87,11 @@ public:
         b.printMatrixDimension();
         b.printMatrix();
             
-        T A = a.dynamicMatrix, B = b.dynamicMatrix;
         for(int i = 0; i < a.rows; i++) {
             for(int j = 0; j < b.columns; j++) {
                 result.dynamicMatrix[i][j] = 0;
                 for(int k = 0; k < a.columns; k++) {
-                    result.dynamicMatrix[i][j] += A[i][k] * B[k][j];
+                    result.dynamicMatrix[i][j] += a.dynamicMatrix[i][k] * b.dynamicMatrix[k][j];
                 }
             }
         }

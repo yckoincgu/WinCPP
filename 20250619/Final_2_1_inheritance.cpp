@@ -8,7 +8,7 @@ using namespace std;
 
 template <typename T>
 class Matrix {
-protected:
+public:
     T dynamicMatrix;
     int rows, columns;
     string errorInformation;
@@ -88,14 +88,14 @@ public:
         b.printMatrixDimension();
         b.printMatrix();
             
-        T A = a.getMatrixData();
-        T B = b.getMatrixData();
+        //T A = a.getMatrixData();
+        //T B = b.getMatrixData();
         
         for(int i = 0; i < a.getRows(); i++) {
             for(int j = 0; j < b.getColumns(); j++) {
                 this->dynamicMatrix[i][j] = 0;
                 for(int k = 0; k < a.getColumns(); k++) {
-                    this->dynamicMatrix[i][j] += A[i][k] * B[k][j];
+                    this->dynamicMatrix[i][j] += a.dynamicMatrix[i][k] * b.dynamicMatrix[k][j];
                 }
             }
         }
