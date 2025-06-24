@@ -2,12 +2,16 @@
 
 class Matrix {
 public:
-    int** A;  // The 2D array with heap storage
+    int** A;  
+    /*
+    The 2D array with heap storage
+    A is int** (pointer to array of row pointers)
+    A[0] is int* (pointer to first row's elements)
+    A[0][1] is int (actual integer value)
+    &A[0][1] is int* (address of that integer)
+    &A is int*** (address of the matrix pointer)
+    */
     int n, m; // Dimensions: rows (n) and columns (m)
-    // int** A, It means A is 2D integer array
-	// (int**): Points to the first element of array A.
-	// (int*):  Points to the first element of a row (array A).
-	// A[i][j] (int): The actual integer element, A[i] is a pointer where [j] is an indicator to an element
 
     Matrix(int rows, int columns) : n(rows), m(columns) {
         A = new int*[rows];
